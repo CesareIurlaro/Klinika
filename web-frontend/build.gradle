@@ -1,0 +1,36 @@
+plugins {
+    id 'kotlin-platform-js' version '1.2.70'
+}
+
+apply plugin: 'org.jetbrains.kotlin.frontend'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+    expectedBy project(":common")
+    testCompile "org.jetbrains.kotlin:kotlin-test-js"
+}
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
+    kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.main = "call"
+}
+
+kotlinFrontend {
+    npm {
+//        dependency "style-loader" // production dependency
+//        devDependency "karma"     // development dependency
+    }
+//    webpackBundle {
+//        bundleName = "main"
+//        sourceMapEnabled = true | false   // enable/disable source maps
+//        contentPath = file(...) // a file that represents a directory to be served by dev server)
+//        publicPath = "/"  // web prefix
+//        host = "localhost" // dev server host
+//        port = 8088   // dev server port
+//        proxyUrl = "" | "http://...."  // URL to be proxied, useful to proxy backend webserver
+//        stats = "errors-only"  // log level
+//    }
+}
