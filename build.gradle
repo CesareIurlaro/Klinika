@@ -1,6 +1,8 @@
 subprojects {
     buildscript {
         ext.kotlin_version = '1.2.70'
+        ext.springBootVersion = '2.0.5.RELEASE'
+        ext.kotlinx_html_version = '0.6.11'
         repositories {
             jcenter()
             google()
@@ -10,6 +12,8 @@ subprojects {
         dependencies {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
             classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.37"
+            classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlin_version")
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
         }
     }
 
@@ -17,6 +21,8 @@ subprojects {
         jcenter()
         google()
         mavenCentral()
+        maven { url 'https://kotlin.bintray.com/kotlin-js-wrappers' }
+        maven { url "https://kotlin.bintray.com/js-externals" }
     }
 
     group = 'edu.unito'

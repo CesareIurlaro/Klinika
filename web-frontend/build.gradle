@@ -3,34 +3,45 @@ plugins {
 }
 
 apply plugin: 'org.jetbrains.kotlin.frontend'
+apply plugin: 'kotlin-dce-js'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js"
-    expectedBy project(":common")
-    testCompile "org.jetbrains.kotlin:kotlin-test-js"
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-js'
+    compile 'org.jetbrains:kotlin-react:16.5.0-pre.54-kotlin-1.2.70'
+    compile 'org.jetbrains:kotlin-react-dom:16.5.0-pre.54-kotlin-1.2.70'
+    expectedBy project(':common-client')
+    testCompile 'org.jetbrains.kotlin:kotlin-test-js'
 }
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
-    kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
+    kotlinOptions.outputFile = '$project.buildDir.path/js/${project.name}.js'
     kotlinOptions.sourceMap = true
     kotlinOptions.moduleKind = 'commonjs'
-    kotlinOptions.main = "call"
+    kotlinOptions.main = 'call'
 }
 
 kotlinFrontend {
     npm {
-//        dependency "style-loader" // production dependency
-//        devDependency "karma"     // development dependency
+        dependency 'style-loader'
+        dependency '@material-ui/core'
+        dependency '@material-ui/icons'
+        dependency 'react'
+        dependency 'react-dom'
     }
-//    webpackBundle {
-//        bundleName = "main"
-//        sourceMapEnabled = true | false   // enable/disable source maps
-//        contentPath = file(...) // a file that represents a directory to be served by dev server)
-//        publicPath = "/"  // web prefix
-//        host = "localhost" // dev server host
-//        port = 8088   // dev server port
-//        proxyUrl = "" | "http://...."  // URL to be proxied, useful to proxy backend webserver
-//        stats = "errors-only"  // log level
-//    }
+    webpackBundle {
+        bundleName = "main"
+        sourceMapEnabled = false   // enable/disable source maps
+        contentPath = file("${projectDir}/public") // a file that represents a directory to be served by dev server)
+        publicPath = "/"  // web prefix
+        host = "localhost" // dev server host
+        port = 8088   // dev server port
+        stats = "errors-only"  // log level
+    }
+}
+
+compileKotlin2Js {
+    kotlinOptions.outputFile = "${projectDir}/out/web.js"
+    kotlinOptions.moduleKind = "umd"
+    kotlinOptions.sourceMap = true
 }
