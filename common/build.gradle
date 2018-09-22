@@ -7,3 +7,12 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common"
     testCompile "org.jetbrains.kotlin:kotlin-test-common"
 }
+
+compileKotlinCommon {
+    kotlinOptions {
+        freeCompilerArgs = [
+                "-Xuse-experimental=kotlin.Experimental",
+                "-Xuse-experimental=kotlin.ExperimentalMultiplatform"
+        ]
+    }
+}
