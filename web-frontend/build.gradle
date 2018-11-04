@@ -1,5 +1,5 @@
 plugins {
-    id 'kotlin-platform-js' version '1.2.70'
+    id 'kotlin-platform-js' version '1.3.0'
 }
 
 apply plugin: 'org.jetbrains.kotlin.frontend'
@@ -7,8 +7,8 @@ apply plugin: 'kotlin-dce-js'
 
 dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib-js'
-    compile 'org.jetbrains:kotlin-react:16.5.0-pre.54-kotlin-1.2.70'
-    compile 'org.jetbrains:kotlin-react-dom:16.5.0-pre.54-kotlin-1.2.70'
+    compile 'org.jetbrains:kotlin-react:+'
+    compile 'org.jetbrains:kotlin-react-dom:+'
     expectedBy project(':common-client')
     testCompile 'org.jetbrains.kotlin:kotlin-test-js'
 }
